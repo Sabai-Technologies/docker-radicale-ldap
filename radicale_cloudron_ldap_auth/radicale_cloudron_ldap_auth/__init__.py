@@ -94,7 +94,7 @@ class Auth(BaseAuth):
             logger.error(conn.result)
             return ""
 
-        final_search_filter = self.ldap_filter.replace("%username", login)
+        final_search_filter = self.ldap_filter.replace("%username", escape_filter_chars(login))
         conn.search(search_base=self.ldap_base,
                     search_filter=final_search_filter,
                     attributes=ldap3.ALL_ATTRIBUTES)
